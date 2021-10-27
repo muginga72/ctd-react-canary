@@ -1,10 +1,10 @@
 import React from 'react';
+import TodoListItem from './component/TodoListItem';
 
-/* Array to store a variable TodoList */
 const todoList = [
   {
     id: '0',
-    title: 'Complete assignment Lesson 1-1'
+    title: 'Complete assignment Lesson 1-2'
   },
   {
     id: '1',
@@ -16,17 +16,14 @@ const todoList = [
   },
 ];
 
-function TodoList() {
+function TodoList(props) {
+  const todo = todoList;
   return (
-    <ul>
-      {/* Rendering todo list */}
-      {todoList.map(function (listItem) {
-        return <li key={listItem.id}>
-          <span>{listItem.title}</span>
-        </li>
-        }
-      )}
-    </ul>
+    <div>
+      <ul>
+
+      </ul>
+    </div>
   );
 }
 
