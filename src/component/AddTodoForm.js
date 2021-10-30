@@ -1,20 +1,18 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 function AddTodoForm(props) {
-  const [inputVal, setInputVal] = useState('');
+  
+  const [initText, setInitText] = useState('');
 
-  const handleAddTodo = (newItem) => {
-    console.log(newItem);
-    props.onAddTodo(newItem);
-    setInputVal('');
+  const handleAddTodo = (e) => {
+    console.log(e);
+    e.preventDefault();
+    props.onAddTodo(initText);
+    setInitText('');
   }
 
   return (
-    <form onSubmit={(e) => {
-      e.preventDefault();
-      handleAddTodo(inputVal);
-    }
-    }>
+    <form onSubmit={handleAddTodo}>
       <div>
         <label
           htmlFor="todoTitle"><strong>Title: </strong>
@@ -24,8 +22,8 @@ function AddTodoForm(props) {
           name="title" required
           id="todoTitle"
           placeholder="Add new todo"
-          onChange={e => setInputVal(e.target.value)}
-          value={inputVal}
+          value={initText}
+          onChange={e => setInitText(e.target.value)}
         />
         <button style={{color: "blue"}}>Add</button>
         <hr/>
