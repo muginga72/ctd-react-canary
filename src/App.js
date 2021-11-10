@@ -4,6 +4,7 @@ import AddTodoForm from './component/AddTodoForm';
 
 function App() {
   const [newTodo, setNewTodo] = useState('');
+  const [todoList, setTodoList] = useState([{id: 1, title: 'Running' }])
   
   return (
     <div>
@@ -11,7 +12,7 @@ function App() {
 
       <AddTodoForm onAddTodo={setNewTodo} newTodo={newTodo} />
       <p>{newTodo}</p>
-      <TodoList />
+      <TodoList todoList={ todoList } />
       
     </div>
   );
