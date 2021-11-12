@@ -1,9 +1,11 @@
 import React from 'react'
 
-function TodoListItem({todo}) {
+function TodoListItem({ todo }) {
+  const {title} = todo;
+  console.log(todo)
   return (
     <li>
-      <span>{todo.title}</span>
+      <span>{title}</span>
     </li>
   );
 }
