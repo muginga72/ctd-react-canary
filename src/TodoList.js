@@ -1,12 +1,16 @@
 import React from "react";
 import TodoListItem from "./component/TodoListItem";
 
-function TodoList({ todoList }) {
+function TodoList({ todoList, removeTodo }) {
   return (
     <div>
       <ul>
         {todoList.map(item => (
-          <TodoListItem key={item.id} todo={item} />
+          <TodoListItem
+            key={item.id}
+            todo={item}
+            onRemoveTodo={removeTodo}
+          />
         ))}
       </ul>
     </div>
