@@ -1,11 +1,11 @@
 import React from 'react'
 
-function TodoListItem({ todo }) {
+function TodoListItem({ todo, onRemoveTodo }) {
   const {title} = todo;
-  console.log(todo)
   return (
     <li>
       <span>{title}</span>
+      <button type="button" onClick={() => onRemoveTodo(todo.id)}> Remove</button>
     </li>
   );
 }
