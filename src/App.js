@@ -9,20 +9,20 @@ function App() {
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve({
-          data: {
-            todoList: JSON.parse(localStorage.getItem(initialTodoList)) || []
-          }
-        })
-      }, 2000);
-    })
-      .then(({ data }) => {
-        setTodoList(data.todoList);
+    fetch('https://api.airtable.com/v0/app6WkPQtNjU0dxxU/Default',
+      {
+        headers: { "Authorization": "Bearer key889ohx5Mc5ygVh" }
+      })
+      .then((res) => res.json())
+      .then((result) => {
+        setTodoList(result.records) // payload??
         setIsLoading(false);
-      });
-  }, []); 
+        console.log(result);
+      })
+      .catch((error) => {
+        console.log(error);
+    })
+  }, [])
   
   useEffect(() => {
     if (!isLoading)
@@ -44,9 +44,8 @@ function App() {
       <AddTodoForm
         onAddTodo={addTodo}
       />
-      {/* Second Bug */}
       {isLoading ? (
-        <p>Loading… </p>
+        <p>Fetching Data... </p>
       ) : (
         <TodoList todoList={todoList}
           removeTodo={removeTodo}

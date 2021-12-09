@@ -5,10 +5,10 @@ function TodoList({ todoList, removeTodo }) {
   return (
     <div>
       <ul>
-        {todoList.map(item => (
+        {todoList.map(records => (
           <TodoListItem
-            key={item.id}
-            todo={item}
+            key={records.id}
+            todo={records.fields.Title}
             onRemoveTodo={removeTodo}
           />
         ))}
