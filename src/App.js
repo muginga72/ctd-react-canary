@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import TodoList from "./TodoList";
 import AddTodoForm from "./component/AddTodoForm";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 const initialTodoList = "firstApp.todos";
 
@@ -15,7 +16,7 @@ function App() {
       })
       .then((res) => res.json())
       .then((result) => {
-        setTodoList(result.records) // payload??
+        setTodoList(result.records)
         setIsLoading(false);
         console.log(result);
       })
@@ -39,19 +40,26 @@ function App() {
   };
 
   return (
-    <>
-      <h1 style={{ color: "blue" }}>Todo List</h1>
-      <AddTodoForm
-        onAddTodo={addTodo}
-      />
-      {isLoading ? (
-        <p>Fetching Data... </p>
-      ) : (
-        <TodoList todoList={todoList}
-          removeTodo={removeTodo}
-        />
-      )}
-    </>
+    <BrowserRouter>
+      <Switch>
+        <Route exact path="/">
+            <h1 style={{ color: "blue" }}>Todo List</h1>
+            <AddTodoForm
+              onAddTodo={addTodo}
+            />
+            {isLoading ? (
+              <p>Fetching Data... </p>
+            ) : (
+              <TodoList todoList={todoList}
+                removeTodo={removeTodo}
+              />
+          )}
+        </Route>
+        <Route path="/new">
+          <h1 style={{ color: "Orange" }}>New Todo List</h1>
+        </Route>
+      </Switch>
+    </BrowserRouter>
   );
 }
 
