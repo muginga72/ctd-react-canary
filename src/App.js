@@ -56,7 +56,8 @@ function App() {
           )}
         </Route>
         <Route path="/new">
-          <h1 style={{ color: "Orange" }}>New Todo List</h1>
+          <h1 style={{ color: "blue" }}>New Todo List</h1>
+          <p>React is awesome!</p>
         </Route>
       </Switch>
     </BrowserRouter>
