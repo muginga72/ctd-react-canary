@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import InputWithLabel from '../InputWithLabel'
+import styles from './AddTodoForm.module.css'
 
 function AddTodoForm({ onAddTodo }) {
   
@@ -12,13 +13,13 @@ function AddTodoForm({ onAddTodo }) {
 
   const handleAddTodo = (e) => {
     e.preventDefault();
-    onAddTodo({id: Date.now(), title: todoTitle});
+    onAddTodo({ id: Date.now(), fields: { Title: todoTitle }});
     setTodoTitle('');
   }
 
   return (
-    <>
-      <form onSubmit={handleAddTodo}>
+    <div className={styles.form}>
+      <form onSubmit={handleAddTodo} className={styles.todo}>
         <InputWithLabel
           id="title" required
           type="text"
@@ -31,7 +32,7 @@ function AddTodoForm({ onAddTodo }) {
         </InputWithLabel>
       </form>
       <hr/>
-    </>
+    </div>
   );
 }
 

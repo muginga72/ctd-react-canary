@@ -1,0 +1,35 @@
+/* Styling the text-font */
+.app {
+  font-family: 'Times New Roman', Times, serif;
+  text-align: center;
+}
+
+/* Style for the header*/
+.headlineTitle {
+  color: darkgreen;
+  font-size: 48px;
+  font-weight: 300;
+  letter-spacing: 2px;
+}
+
+/* Styling the container and text color */
+.container {
+  height: auto;
+  padding: 20px;
+  background: #83a4d4;
+  background: linear-gradient(to right, #b6fbff, #83a4d4);
+  color: #171212;
+}
+
+/* Making app and headlineTitle responsiveness */
+@media (max-width: 600px) {
+  .app {
+    color: cyan;
+  }
+}
+
+@media (orientation: landscape) and (max-width: 600px) {
+  .headlineTitle {
+    color:blue;
+  }
+}
