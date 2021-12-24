@@ -1,5 +1,6 @@
-import React, { useEffect, useRef } from 'react'
- 
+import React, { useEffect, useRef } from 'react';
+import styles from './InputWithLabel.module.css'
+
 const InputWithLabel = ({
   id,
   name,
@@ -21,8 +22,9 @@ const InputWithLabel = ({
 
   return (
     <>
-      <label
-        htmlFor={id}><strong>{ children }</strong>
+      <label 
+        htmlFor={id} className={styles.label}>
+        <strong>{children}</strong>
       </label>
       &nbsp;
       <input
@@ -34,8 +36,9 @@ const InputWithLabel = ({
         placeholder="Add new to do"
         value={todoTitle}
         onChange={handleTitleChange}
+        className={styles.input}
       />
-      <button style={{ color: "blue" }}>Add</button>
+      <button className={styles.buttonSubmit} style={{ color: "blue" }}>Add</button>
     </>
   );
 }
