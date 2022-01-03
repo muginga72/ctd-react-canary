@@ -1,0 +1,52 @@
+/* Styling the label Title in the input */
+.label {
+  color: #fff;
+  border-top: 2px solid blue;
+  border-left: 2px solid blue;
+  border-radius: 5px;
+  padding-left: 5px;
+  font-size: 24px;
+  background: rgba(25, 80, 120, .7);
+  }
+
+/* Styling the input area */
+.input {
+  border: none;
+  border-bottom: 2px solid blue;
+  background-color: transparent;
+  font-size: 24px;
+}
+
+/* Styling the Add button in the input section */
+.buttonSubmit {
+  /* background: white; */
+  background: rgba(25, 80, 120, .7);
+  border: 2px solid blue;
+  border-radius: 5px;
+  padding: 6px 10px;
+  cursor: pointer;
+}
+
+.buttonSubmit:hover {
+  background-color: rgb(50, 255, 50); 
+}
+
+/* Making input, label and submit button responsiveness */
+@media (max-width: 500px) {
+  .label {
+    color: blue;
+  }
+}
+
+@media (max-width: 500px) {
+  .input {
+    color: whitesmoke;
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 500px) {
+  .icon {
+    color: whitesmoke;
+  }
+}
