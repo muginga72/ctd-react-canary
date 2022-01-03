@@ -2,22 +2,22 @@
 .app {
   font-family: 'Times New Roman', Times, serif;
   text-align: center;
+  font-size: 1.5rem;
 }
 
 /* Style for the header*/
 .headlineTitle {
-  color: darkgreen;
-  font-size: 48px;
-  font-weight: 300;
+  color: White;
+  font-size: 80px;
+  font-weight: 100px;
   letter-spacing: 2px;
+  background: rgba(25, 80, 120, .5);
 }
 
 /* Styling the container and text color */
 .container {
   height: auto;
   padding: 20px;
-  background: #83a4d4;
-  background: linear-gradient(to right, #b6fbff, #83a4d4);
   color: #171212;
 }
 
