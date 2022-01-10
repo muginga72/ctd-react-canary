@@ -2,25 +2,77 @@
 .buttonRemove {
   background: rgb(150, 50, 50);
   color: #fff;
+  width: auto; /* fix text overflow  */
+  text-align: right;
   border: no;
   border-radius: 5px;
-  padding: 4px 8px;
+  padding: 8px;
   cursor: pointer;
+}
+
+.buttonGroup {
+  margin-left: auto; /* aligned the button to the right  */
+}
+
+.cancelButton {
+  background: darkred;
+  color: #fff;
+  border: no;
+  margin-right: 4px;
+  border-radius: 5px;
+  padding: 8px;
+  cursor: pointer;
+}
+ 
+.buttonEdit {
+  background: green; 
+  width: auto; /* fix text overflow  */
+  border: no;
+  margin-right: 4px;
+  border-radius: 5px;
+  padding: 4px;
+  cursor: pointer;
+}
+
+.saveButton {
+  background: lightskyblue;
+  border: no;
+  border-radius: 5px;
+  padding: 8px;
+  cursor: pointer;
+}
+
+.fa-edit {
+  margin-left: 0.5rem;
+  font-size: 1.8rem;
 }
 
 .buttonRemove:hover {
   background-color: rgb(255, 50, 50); 
 }
 
+.cancelButton:hover {
+  background-color: rgb(255, 50, 50); 
+}
+
+.buttonEdit:hover {
+  background-color: rgb(103, 150, 50); 
+}
+
+.saveButton:hover {
+  background-color: rgb(50, 150, 80); 
+}
+ 
 /* Styling the list item section */
 li {
   list-style: none;
 }
-
+ 
 .ListItem {
   display: flex;
   color: whitesmoke;
-  justify-content: space-between;
+  width: auto;
+  /* justify-content: space-between; */
   margin-bottom: 20px;
   background: rgba(25, 80, 120, .7);
   box-shadow: 0 0 15px -2px #292727;
@@ -30,18 +82,22 @@ li {
   border-radius: 5px;
 }
 
+/* .renameTodo {
+  color: #fff;
+} */
+ 
 .ListItem:hover {
   background-color: rgba(155, 178, 209, .7);
   cursor: pointer;
 }
-
+ 
 /* Making ListIten responsiveness */
 @media (max-width: 500px) {
   .ListItem {
     color: rgba(25, 25, 65, .9);
   }
 }
-
+ 
 @media (max-width: 500px) {
   .icon {
     color: orange;
