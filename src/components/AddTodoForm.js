@@ -9,26 +9,51 @@ import {
   faSortAmountDown,
   faSortAmountUp,
 } from '@fortawesome/free-solid-svg-icons';
-  
-const AddTodoForm = ({ record, onAddTodo }) => {
-  const [ todoTitle, setTodoTitle ] = useState('')
 
+const AIRTABLEAPI = process.env.REACT_APP_AIRTABLE_API_KEY;
+const AIRTABLEBASEID = process.env.REACT_APP_AIRTABLE_BASE_ID;
+const AIRTABLETABLENAME = "Default";
+const url = `https://api.airtable.com/v0/${AIRTABLEBASEID}/${AIRTABLETABLENAME}` 
+
+const AddTodoForm = ({ onAddTodo }) => {
+  const [todoTitle, setTodoTitle] = useState('');
+    
   const handleTitleChange = ({target}) => {
     const { value } = target;
     setTodoTitle(value);
-    // sortedList(record);
   } 
 
   const handleAddTodo = (e) => {
     e.preventDefault();
-    onAddTodo({ id: Date.now(), fields: { Title: todoTitle }});
+    onAddTodo({ id: Date.now(), fields: { Title: todoTitle } });
     setTodoTitle('');
+
+    fetch(`${url}`,
+      {
+        method: "POST",
+        body: JSON.stringify({ fields: { Title: todoTitle } }),
+        headers: {
+          "Authorization": `Bearer ${AIRTABLEAPI}`,
+          "Content-Type": "application/json",
+        }
+      })
+      .then((res) => res.json())
+      .then((result) => {
+      setTodoTitle(result.records)
+        console.log(result);
+      })
+      .catch((err) => {
+        console.error(err);
+      }
+    )
   }
 
   return (
     <div>
       <div className={styles.form}>
-        <form onSubmit={handleAddTodo} className={styles.todo}>
+        <form onSubmit={handleAddTodo}
+          className={styles.todo}
+        >
           <InputWithLabel
             id="title" required
             type="text"

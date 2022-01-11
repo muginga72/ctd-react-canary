@@ -18,42 +18,32 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [isEditing, setIsEditing] = useState(false);
   const [isDeleted, setIsDeleted] = useState(false);
-  const [isUpadting, setIsUpdating] = useState(true)
   
-  // Sending a "POST" request to add record on the table.
   function addTodo(newTodo) {
     setTodoList([...todoList, newTodo]);
   }
 
-  useEffect(() => {
-    if (!isUpadting)
-    localStorage.setItem(initialTodoList, JSON.stringify(todoList));
-  }, [todoList, isUpadting]);
-
   // Sending a "PUT" request to the record  to update the table.
   const submitEditedTodo = (id, newTodo) => {
-    let newTodoListItem;
-    
+    let editedTodoListItem;
     const editedTodoList = [...todoList].map((todoListItem) => {
-      
       if (todoListItem.id === id) {
         const temp = {...todoListItem};
         temp.fields.Title = newTodo;
-        newTodoListItem = {
+        editedTodoListItem = {
           id: temp.id,
           fields: { Title: temp.fields.Title }
         }
-
         return temp;
       }
       return todoListItem;
     });
-    console.log(newTodoListItem)
+    console.log(editedTodoListItem)
 
     fetch(`${url}`,
       {
         method: "PUT",
-        body: JSON.stringify({ records: [newTodoListItem] }),
+        body: JSON.stringify({ records: [editedTodoListItem] }),
         headers: {
           'Authorization': `Bearer ${AIRTABLEAPI}`,
           "Content-Type": "application/json",
@@ -86,7 +76,7 @@ function App() {
         headers: {
           'Authorization': `Bearer ${AIRTABLEAPI}`,
           "Content-Type": "application/json",
-        },
+        }
       })
       .then((res) => res.json())
       .then((result) => {
@@ -102,6 +92,8 @@ function App() {
     if (!isDeleted)
     localStorage.setItem(initialTodoList, JSON.stringify(todoList));
   }, [todoList, isDeleted]);
+
+  
 
   // Sending a "GET" request to fetch the existing records on our table.
   useEffect(() => {
