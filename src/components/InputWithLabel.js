@@ -37,7 +37,7 @@ const InputWithLabel = ({
         // Will assign the instance element to changeable current property
         ref={inputRef}
         placeholder="Add new to do"
-        value={todoTitle}
+        value={todoTitle || ''}
         onChange={handleTitleChange}
         className={styles.input}
       />
