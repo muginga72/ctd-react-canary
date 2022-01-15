@@ -3,21 +3,14 @@ import React, { useState } from 'react';
 import InputWithLabel from './InputWithLabel'
 import styles from './AddTodoForm.module.css'
 import PropTypes from 'prop-types';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faCalendarTimes,
-  faSortAmountDown,
-  faSortAmountUp,
-} from '@fortawesome/free-solid-svg-icons';
 
 const AIRTABLEAPI = process.env.REACT_APP_AIRTABLE_API_KEY;
 const AIRTABLEBASEID = process.env.REACT_APP_AIRTABLE_BASE_ID;
-const AIRTABLETABLENAME = "Default";
-const url = `https://api.airtable.com/v0/${AIRTABLEBASEID}/${AIRTABLETABLENAME}` 
+const AIRTABLETABLENAME = "Default"; 
 
 const AddTodoForm = ({ onAddTodo }) => {
   const [todoTitle, setTodoTitle] = useState('');
-    
+  
   const handleTitleChange = ({target}) => {
     const { value } = target;
     setTodoTitle(value);
@@ -28,7 +21,7 @@ const AddTodoForm = ({ onAddTodo }) => {
     onAddTodo({ id: Date.now(), fields: { Title: todoTitle } });
     setTodoTitle('');
 
-    fetch(`${url}`,
+    fetch(`https://api.airtable.com/v0/${AIRTABLEBASEID}/${AIRTABLETABLENAME}`,
       {
         method: "POST",
         body: JSON.stringify({ fields: { Title: todoTitle } }),
@@ -66,52 +59,6 @@ const AddTodoForm = ({ onAddTodo }) => {
           </InputWithLabel>
         </form>
         <hr />
-      </div>
-      <div>
-        <span>
-          <button
-            type="button"
-            className={styles.sortTitle}
-          // onClick={() => handleSort('TITLE')}
-          >
-              Title
-          </button>
-        </span>
-        <span>
-          <button
-            type="button"
-            className={styles.sortDownButton}
-          // onClick={() => handleSort('UP')}
-          >
-            <FontAwesomeIcon icon={faSortAmountUp} className={styles.icon} />
-              {/* UP */}
-          </button>
-        </span>
-        <span>
-          <button
-            type="button"
-            className={styles.sortUpButton}
-            // onClick={() => handleSort('DOWN')}
-          >
-            <FontAwesomeIcon icon={faSortAmountDown} className={styles.icon} />
-              {/* DOWN */}
-          </button>
-        </span>
-        <span>
-          <button
-            type="button"
-            className={styles.sortCreatedTime}
-            // onClick={() => handleSort('CREATEDTIME')}
-          >
-            <FontAwesomeIcon icon={faCalendarTimes} className={styles.icon} />
-              {/* Created Time */}
-          </button>
-        </span>
-        <span>
-          <button className={styles.actions}>
-            <strong>Actions</strong>
-          </button>
-        </span>
       </div>
     </div>
   );

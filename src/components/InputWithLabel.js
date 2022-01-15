@@ -12,7 +12,7 @@ const InputWithLabel = ({
   todoTitle,
 }) => {
   // Create persistent object value that doesn't change
-  const inputRef = useRef();
+  const inputRef = useRef(null);
 
   // Perform the focus on the input field
   useEffect(() => {
