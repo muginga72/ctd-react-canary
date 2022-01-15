@@ -5,6 +5,13 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import styles from './App.module.css';
 import TodoContainer from "./components/TodoContainer";
 import Footer from "./Footer"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faCalendarTimes,
+  faSortAmountDown,
+  faSortAmountUp,
+} from '@fortawesome/free-solid-svg-icons';
+
 
 const initialTodoList = "reactApp.todos";
 
@@ -38,7 +45,6 @@ function App() {
       }
       return todoListItem;
     });
-    console.log(editedTodoListItem)
 
     fetch(`${url}`,
       {
@@ -52,7 +58,6 @@ function App() {
       .then((res) => res.json())
       .then((result) => {
         setIsEditing(true);
-        console.log(result);
         setTodoList(editedTodoList)
       })
       .catch((error) => {
@@ -93,7 +98,39 @@ function App() {
     localStorage.setItem(initialTodoList, JSON.stringify(todoList));
   }, [todoList, isDeleted]);
 
-  
+  const sortTodoList = (direction) => {
+    const sortedTodoList = [...todoList].sort((objectA, objectB) => {
+      const titleA = objectA.fields.Title.toUpperCase();
+      const titleB = objectB.fields.Title.toUpperCase();
+      const timeA = objectA.createdTime;
+      const timeB = objectB.createdTime;
+
+      if (direction === 'asc') {
+        if (titleA < titleB) {
+          return -1;
+        } else if (titleA === titleB) {
+          return 0;
+        } else {
+          return 1;
+        }
+      } else if (direction === 'desc') {
+        if (titleA > titleB) {
+          return -1;
+        } else if (titleA === titleB) {
+          return 0;
+        } else {
+          return 1;
+        }
+      } else if (direction === "time") {
+        if (timeA > timeB) {
+          return -1;
+        } else return 1;
+      }
+      return 0;
+    })
+    console.log(sortedTodoList)
+    setTodoList(sortedTodoList)
+  };
 
   // Sending a "GET" request to fetch the existing records on our table.
   useEffect(() => {
@@ -105,6 +142,7 @@ function App() {
         console.log(result)
         setTodoList(result.records)
         setIsLoading(false);
+        // sortTodoList(data.records)
       })
       .catch((error) => {
         console.log(error);
@@ -126,12 +164,37 @@ function App() {
                 <div className={styles.container}>
                   <h1 className={styles.headlineTitle}
                     >Todo List <i className="fas fa-user-check"/>
-                  </h1>
-                  <AddTodoForm
-                    onAddTodo={addTodo}
-                  />
+                </h1>
+                
+                <AddTodoForm onAddTodo={addTodo} />
+                <button type="button" className={styles.sortTitle}
+                  onClick={() => sortTodoList('asc')}>
+                  Title
+                </button>
+
+                <button type="button" className={styles.sortDownButton}
+                  onClick={() => sortTodoList('asc')}>
+                  <FontAwesomeIcon icon={faSortAmountUp} className={styles.icon} />
+                    {/* UP */}
+                </button>
+
+                <button type="button" className={styles.sortUpButton}
+                  onClick={() => sortTodoList('desc')}>
+                  <FontAwesomeIcon icon={faSortAmountDown} className={styles.icon} />
+                    {/* DOWN */}
+                </button>
+
+                <button type="button" className={styles.sortCreatedTime}
+                  onClick={() => sortTodoList('time')}>
+                  <FontAwesomeIcon icon={faCalendarTimes} className={styles.icon} />
+                    {/* Created Time */}
+                </button>
+
+                <button className={styles.actions}><strong>Actions</strong></button>
+
                   {isLoading ? (
-                    <p>Fetching Data... </p>
+                    <p>Loading... </p>
+                
                   ) : (
                     <TodoList todoList={todoList}
                       removeTodo={(id) => removeTodo(id)}
