@@ -82,9 +82,9 @@ li {
   border-radius: 5px;
 }
 
-/* .renameTodo {
+.renameTodo {
   color: #fff;
-} */
+}
  
 .ListItem:hover {
   background-color: rgba(155, 178, 209, .7);
