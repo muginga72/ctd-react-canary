@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-// import { sortBy } from 'lodash';
 import InputWithLabel from './InputWithLabel'
 import styles from './AddTodoForm.module.css'
 import PropTypes from 'prop-types';

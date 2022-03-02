@@ -12,7 +12,6 @@ import {
   faSortAmountUp,
 } from '@fortawesome/free-solid-svg-icons';
 
-
 const initialTodoList = "reactApp.todos";
 
 const AIRTABLEAPI = process.env.REACT_APP_AIRTABLE_API_KEY;
@@ -142,7 +141,6 @@ function App() {
         console.log(result)
         setTodoList(result.records)
         setIsLoading(false);
-        // sortTodoList(data.records)
       })
       .catch((error) => {
         console.log(error);
@@ -165,36 +163,29 @@ function App() {
                   <h1 className={styles.headlineTitle}
                     >Todo List <i className="fas fa-user-check"/>
                 </h1>
-                
                 <AddTodoForm onAddTodo={addTodo} />
                 <button type="button" className={styles.sortTitle}
                   onClick={() => sortTodoList('asc')}>
                   Title
                 </button>
-
                 <button type="button" className={styles.sortDownButton}
                   onClick={() => sortTodoList('asc')}>
                   <FontAwesomeIcon icon={faSortAmountUp} className={styles.icon} />
                     {/* UP */}
                 </button>
-
                 <button type="button" className={styles.sortUpButton}
                   onClick={() => sortTodoList('desc')}>
                   <FontAwesomeIcon icon={faSortAmountDown} className={styles.icon} />
                     {/* DOWN */}
                 </button>
-
                 <button type="button" className={styles.sortCreatedTime}
                   onClick={() => sortTodoList('time')}>
                   <FontAwesomeIcon icon={faCalendarTimes} className={styles.icon} />
                     {/* Created Time */}
                 </button>
-
                 <button className={styles.actions}><strong>Actions</strong></button>
-
                   {isLoading ? (
                     <p>Loading... </p>
-                
                   ) : (
                     <TodoList todoList={todoList}
                       removeTodo={(id) => removeTodo(id)}
